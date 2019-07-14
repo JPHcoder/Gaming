@@ -1,0 +1,81 @@
+* {
+  font-family: Helvetica, Arial, sans-serif;
+  text-align: center;
+}
+button {
+  background-color: rgb(82, 186, 179);
+  border-radius: 6px;
+  border: none;
+  color: rgb(255, 255, 255);
+  padding: 10px;
+  text-transform: uppercase;
+  width: 200px;
+  cursor: pointer;
+}
+#placeholder1 {
+  position: relative;
+  top: 20px;
+  height: 50px;
+  width: 50px;
+  padding: 20px;
+  margin: 20px auto;
+  border: 1px solid gray;
+  border-radius: 10px;  
+  font-size:80px;
+}
+#placeholder2 {
+  position: relative;
+  top: 20px;
+  height: 50px;
+  width: 50px;
+  padding: 20px;
+  margin: 20px auto;
+  border: 1px solid gray;
+  border-radius: 10px;  
+  font-size:80px;
+}
+#placeholder3 {
+  position: relative;
+  top: 20px;
+  height: 50px;
+  width: 50px;
+  padding: 20px;
+  margin: 20px auto;
+  border: 1px solid gray;
+  border-radius: 10px;  
+  font-size:80px;
+}
+#placeholder4 {
+  position: relative;
+  top: 20px;
+  height: 50px;
+  width: 50px;
+  padding: 20px;
+  margin: 20px auto;
+  border: 1px solid gray;
+  border-radius: 10px;  
+  font-size:80px;
+}
+#placeholder5 {
+  position: relative;
+  top: 20px;
+  height: 50px;
+  width: 50px;
+  padding: 20px;
+  margin: 20px auto;
+  border: 1px solid gray;
+  border-radius: 10px;  
+  font-size:80px;
+}
+#placeholder6 {
+  position: relative;
+  top: 20px;
+  height: 50px;
+  width: 50px;
+  padding: 20px;
+  margin: 20px auto;
+  border: 1px solid gray;
+  border-radius: 10px;  
+  font-size:80px;
+}
+

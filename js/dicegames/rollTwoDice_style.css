@@ -1,0 +1,43 @@
+html { 
+	background-color:#092E20; 
+}
+
+body { 
+	position:relative;
+	border-radius:8px; 
+	box-shadow:black 0px 0px 2px; 
+	width: 600px; 
+	background:#FFF; 
+	margin:20px auto; 
+	border:solid 1px black; 
+	font-family: arial, sans-serif; 
+	padding:50px;  
+}
+
+/*
+#deal {
+	position: absolute;
+	left:310px;
+	top:170px;
+}
+*/
+
+#rollbutton {
+	position: absolute;
+	left:1px;
+	top:1px;
+}
+
+#die1 {
+	position: absolute;
+	left:50px;
+	top:100px;
+}
+
+#die2 {
+	position: absolute;
+	left:120px;
+	top:100px;
+}
+
+

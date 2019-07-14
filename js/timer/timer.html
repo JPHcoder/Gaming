@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>Timer</title>
+</head>  
+<body>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!-- ;
+//var countDownDate = localStorage.getItem('startDate');
+//if (countDownDate) {
+//    countDownDate = new Date(countDownDate);
+//} else {
+//    countDownDate = new Date();
+//    localStorage.setItem('startDate', countDownDate);
+//}
+var countDownDate = new Date();
+localStorage.setItem('startDate', countDownDate);
+
+var textString = "The quick brown fox jumps over the lazy dog";
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+ // Get todays date and time
+ var now = new Date().getTime();
+
+ // Find the distance between now an the count down date
+ var distance = now - countDownDate.getTime();
+
+ // Time calculations for seconds
+ var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+ // Output the result in an element with id="mytimer"
+ document.getElementById("mytimer").innerHTML = seconds + "s ";
+
+ //set text
+ document.getElementById("mytext").innerHTML = "The quick brown fox jumps over the lazy dog";
+
+}, 1000);
+
+function process(textString) {
+ var myresponse=document.forms.typingquiz.mytyping.value;
+
+ var finalTime = new Date().getTime();
+ var finalDistance = finalTime - countDownDate.getTime();
+ var finalSeconds = Math.floor((finalDistance % (1000 * 60)) / 1000);
+ var finalPerMin = Math.floor(9 * (60 / finalSeconds));
+
+ if (myresponse==textString) {
+  alert ('Well done - your typing of '+myresponse+' was correct in '+finalSeconds+' seconds! \n\nThis equates to a typing rate of '+finalPerMin+' words per minute.\n\nPress this button to reload the page for another game.');
+  document.location=document.location;
+ } else {
+  alert ('Not quite correct - your typing of '+myresponse+' was not correct in '+finalSeconds+' seconds. \n\nPress this button to reload the page for another game.');
+  document.location=document.location;
+
+ }
+
+}
+</SCRIPT>
+
+<FORM onSubmit="" NAME="typingquiz">
+<center>
+ <span id="mytimer"></span>
+ <br>
+ <br>
+ <span id="mytext"></span>
+ <br>
+ <br>
+ <INPUT TYPE="text" NAME="mytyping" SIZE="50" MAXLENGTH="50" VALUE="">
+ <INPUT TYPE="button" VALUE="Submit" onClick='process(textString)'>
+</center>
+</FORM>
+</body>
+</html>
