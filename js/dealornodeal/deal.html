@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+#myV { width: 25px; padding: 50px 0; text-align: center; background-color: lightblue; }
+</style>
+</head>
+<body>
+
+
+<script>
+var opened=0;
+var total=0;
+var curoffer=0;
+var topoffer=0;
+var cases = [0,1,5,10,25,50,75,100,200,300,400,500,750,1000,5000,10000,25000,50000,75000,100000,200000,300000,400000,500000,750000,1000000];
+var copened = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+for (var i = cases.length - 1; i > 0; i--) {
+  var j = Math.floor(Math.random() * (i + 1)); var temp = cases[i]; cases[i] = cases[j]; cases[j] = temp;
+}
+
+function dealTaken() {
+  alert ('Well done - you won $'+curoffer);
+}
+
+function myCase(cnum) {  
+ if (cases[cnum-1]==0) var x = document.getElementById("myV0"); 
+ else if (cases[cnum-1]==1) var x = document.getElementById("myV1");
+ else if (cases[cnum-1]==5) var x = document.getElementById("myV2");
+ else if (cases[cnum-1]==10) var x = document.getElementById("myV3");
+ else if (cases[cnum-1]==25) var x = document.getElementById("myV4");
+ else if (cases[cnum-1]==50) var x = document.getElementById("myV5");
+ else if (cases[cnum-1]==75) var x = document.getElementById("myV6");
+ else if (cases[cnum-1]==100) var x = document.getElementById("myV7");
+ else if (cases[cnum-1]==200) var x = document.getElementById("myV8");
+ else if (cases[cnum-1]==300) var x = document.getElementById("myV9");
+ else if (cases[cnum-1]==400) var x = document.getElementById("myV10");
+ else if (cases[cnum-1]==500) var x = document.getElementById("myV11");
+ else if (cases[cnum-1]==750) var x = document.getElementById("myV12");
+ else if (cases[cnum-1]==1000) var x = document.getElementById("myV13");
+ else if (cases[cnum-1]==5000) var x = document.getElementById("myV14");
+ else if (cases[cnum-1]==10000) var x = document.getElementById("myV15");
+ else if (cases[cnum-1]==25000) var x = document.getElementById("myV16");
+ else if (cases[cnum-1]==50000) var x = document.getElementById("myV17");
+ else if (cases[cnum-1]==75000) var x = document.getElementById("myV18");
+ else if (cases[cnum-1]==100000) var x = document.getElementById("myV19");
+ else if (cases[cnum-1]==200000) var x = document.getElementById("myV20");
+ else if (cases[cnum-1]==300000) var x = document.getElementById("myV21");
+ else if (cases[cnum-1]==400000) var x = document.getElementById("myV22");
+ else if (cases[cnum-1]==500000) var x = document.getElementById("myV23");
+ else if (cases[cnum-1]==750000) var x = document.getElementById("myV24");
+ else if (cases[cnum-1]==1000000) var x = document.getElementById("myV25");
+ if (x.style.display === "none") {x.style.display = "block";} else {x.style.display = "none";}
+ copened[cnum-1]=1; opened++;
+ total=0; for (var a = 0; a < 26 ; a++) { if (copened[a] != 1) total+=cases[a]; }
+ //curoffer=Math.floor(total/(26-opened)) ; document.getElementById("dealValue").value=curoffer;
+ curoffer=Math.floor(total/(26-opened) * ((100 - (26-opened)*3)/100)) ; document.getElementById("dealValue").value=curoffer;
+ if (curoffer > topoffer) topoffer=curoffer; document.getElementById("topdealValue").value=topoffer;
+
+}
+</script>
+
+<center><h1>Deal or No Deal</h1></center>
+<center><a href="./deal.html">New Game</a></center>
+<hr>
+<table align="center" border="0">
+<tr>
+<td width="10%"><div id="myV0">0</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><p id="case1N"><button onclick="var c=this; c.disabled=true; myCase(1)">Case1</button></p></td> 
+<td width="10%"><p id="case2N"><button onclick="var c=this; c.disabled=true; myCase(2)">Case2</button></p></td> 
+<td width="10%"><p id="case3N"><button onclick="var c=this; c.disabled=true; myCase(3)">Case3</button></p></td> 
+<td width="10%"><p id="case4N"><button onclick="var c=this; c.disabled=true; myCase(4)">Case4</button></p></td> 
+<td width="10%"><p id="case5N"><button onclick="var c=this; c.disabled=true; myCase(5)">Case5</button></p></td> 
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV13">1000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV1">1</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><p id="case6N"><button onclick="var c=this; c.disabled=true; myCase(6)">Case6</button></p></td> 
+<td width="10%"><p id="case7N"><button onclick="var c=this; c.disabled=true; myCase(7)">Case7</button></p></td> 
+<td width="10%"><p id="case8N"><button onclick="var c=this; c.disabled=true; myCase(8)">Case8</button></p></td> 
+<td width="10%"><p id="case9N"><button onclick="var c=this; c.disabled=true; myCase(9)">Case9</button></p></td> 
+<td width="10%"><p id="case10N"><button onclick="var c=this; c.disabled=true; myCase(10)">Case10</button></p></td> 
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV14">5000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV2">5</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><p id="case11N"><button onclick="var c=this; c.disabled=true; myCase(11)">Case11</button></p></td> 
+<td width="10%"><p id="case12N"><button onclick="var c=this; c.disabled=true; myCase(12)">Case12</button></p></td> 
+<td width="10%"><p id="case13N"><button onclick="var c=this; c.disabled=true; myCase(13)">Case13</button></p></td> 
+<td width="10%"><p id="case14N"><button onclick="var c=this; c.disabled=true; myCase(14)">Case14</button></p></td> 
+<td width="10%"><p id="case15N"><button onclick="var c=this; c.disabled=true; myCase(15)">Case15</button></p></td> 
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV15">10000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV3">10</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><p id="case16N"><button onclick="var c=this; c.disabled=true; myCase(16)">Case16</button></p></td> 
+<td width="10%"><p id="case17N"><button onclick="var c=this; c.disabled=true; myCase(17)">Case17</button></p></td> 
+<td width="10%"><p id="case18N"><button onclick="var c=this; c.disabled=true; myCase(18)">Case18</button></p></td> 
+<td width="10%"><p id="case19N"><button onclick="var c=this; c.disabled=true; myCase(19)">Case19</button></p></td> 
+<td width="10%"><p id="case20N"><button onclick="var c=this; c.disabled=true; myCase(20)">Case20</button></p></td> 
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV16">25000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV4">25</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><p id="case21N"><button onclick="var c=this; c.disabled=true; myCase(21)">Case21</button></p></td> 
+<td width="10%"><p id="case22N"><button onclick="var c=this; c.disabled=true; myCase(22)">Case22</button></p></td> 
+<td width="10%"><p id="case23N"><button onclick="var c=this; c.disabled=true; myCase(23)">Case23</button></p></td> 
+<td width="10%"><p id="case24N"><button onclick="var c=this; c.disabled=true; myCase(24)">Case24</button></p></td> 
+<td width="10%"><p id="case25N"><button onclick="var c=this; c.disabled=true; myCase(25)">Case25</button></p></td> 
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV17">50000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV5">50</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><p id="case26N"><button onclick="var c=this; c.disabled=true; myCase(26)">Case26</button></p></td> 
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV18">75000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV6">75</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV19">100000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV7">100</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV20">200000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV8">200</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV21">300000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV9">300</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV22">400000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV10">400</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV23">500000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV11">500</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV24">750000</div></td>
+</tr>
+<tr>
+<td width="10%"><div id="myV12">750</div></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="10%"></td>
+<td width="15%">&nbsp;</td>
+<td width="10%"><div id="myV25">1000000</div></td>
+</tr>
+</table>
+<hr>
+<center>Current deal offer : <input type="text" id="dealValue" size="7" readonly></center>
+<br>
+<center>Top deal offer : <input type="text" id="topdealValue" size="7" readonly></center>
+<br>
+<center><button onclick="dealTaken()">Take Deal</button></center>
+</body>
+</html>
