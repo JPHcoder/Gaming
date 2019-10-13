@@ -1,0 +1,41 @@
+<html>
+<head>
+ <title>Flash Cards</title>
+ <style>
+  input[type='text'] { font-size: 48px; }
+ </style>
+ <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+</head>  
+<body>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!-- ;
+
+function newcards() {
+ randNum=Math.round(Math.random()*(1000000));
+ document.forms.flashcards.myNum.value=randNum;
+ document.forms.flashcards.button1.focus();
+}
+
+// end hide -->
+</SCRIPT>
+
+<FORM onSubmit="" NAME="flashcards">
+<CENTER>
+<TABLE ALIGN="CENTER" BGCOLOR="red" BORDER="3" CELLPADDING="5">
+<TR>
+ <TD BGCOLOR="green"><FONT COLOR="white" FACE="Arial"><B>Random number 0 - 999999</B></FONT></TD>
+</TR>
+<TR>
+<TD>
+<CENTER>
+<INPUT TYPE="text" NAME="myNum" SIZE="6" MAXLENGTH="6" VALUE="">
+<INPUT TYPE="button" VALUE="New Random Number" ID="button1" onClick='newcards()'>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+</FORM>
+</body>
+</html>

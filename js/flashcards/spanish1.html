@@ -1,0 +1,83 @@
+<html>
+<head>
+ <title>Flash Cards</title>
+ <style>
+  input[type='text'] { font-size: 48px; }
+ </style>
+ <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+</head>  
+<body>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!-- ;
+//encode link http://www.javascripter.net/faq/accentedcharacters.htm
+var eng = [];
+var spa = [];
+eng[0]="car"; spa[0]="coche";
+eng[1]="truck"; spa[1]=unescape("cami%F3n");
+eng[2]="bus"; spa[2]=unescape("autob%FAs");
+eng[3]="dog"; spa[3]=unescape("perra(f) or perro(m)");
+eng[4]="cat"; spa[4]=unescape("gata(f) or gato(m)");
+eng[5]="bird"; spa[5]=unescape("p%E1jaro");
+eng[6]="grandmother"; spa[6]=unescape("abuela");
+eng[7]="grandfather"; spa[7]=unescape("abuelo");
+eng[8]="family"; spa[8]=unescape("familia");
+eng[9]="brother"; spa[9]=unescape("hermano");
+eng[10]="sister"; spa[10]=unescape("hermana");
+eng[11]="friend"; spa[11]=unescape("amiga(f) or amigo(m)");
+eng[12]="son"; spa[12]=unescape("hijo");
+eng[13]="daughter"; spa[13]=unescape("hija");
+eng[14]="mother"; spa[14]=unescape("madre");
+eng[15]="mom"; spa[15]=unescape("mam%E1");
+eng[16]="father"; spa[16]=unescape("padre");
+eng[17]="dad"; spa[17]=unescape("pap%E1");
+eng[18]="basketball"; spa[18]=unescape("baloncesto");
+
+
+
+function showit() {
+ var value=document.forms.flashcards.cardNum.value;
+ document.forms.flashcards.english.value=eng[value];
+ document.forms.flashcards.spanish.value=spa[value];
+ document.forms.flashcards.english.style.color="black";
+ document.forms.flashcards.spanish.style.color="red";
+ document.forms.flashcards.button2.focus();
+}
+
+function newcards() {
+ randNum=Math.round(Math.random()*(17));
+ document.forms.flashcards.english.value=eng[randNum];
+ document.forms.flashcards.spanish.value=spa[randNum];
+ document.forms.flashcards.english.style.color="black";
+ document.forms.flashcards.spanish.style.color="white";
+ document.forms.flashcards.cardNum.value=randNum;
+ document.forms.flashcards.button1.focus();
+}
+
+// end hide -->
+</SCRIPT>
+
+<FORM onSubmit="" NAME="flashcards">
+<CENTER>
+<TABLE ALIGN="CENTER" BGCOLOR="red" BORDER="3" CELLPADDING="5">
+<TR>
+<TD BGCOLOR="green">
+<FONT COLOR="white" FACE="Arial"><B>English to Spanish</B></FONT>
+</TD>
+</TR>
+<TR>
+<TD>
+<CENTER>
+<INPUT TYPE="text" NAME="english" SIZE="20" MAXLENGTH="40" VALUE="english" ><BR>
+<INPUT TYPE="text" NAME="spanish" SIZE="20" MAXLENGTH="40" VALUE="spanish"><BR>
+<INPUT TYPE="text" NAME="cardNum" SIZE="2" MAXLENGTH="2" VALUE="">
+<INPUT TYPE="button" VALUE="Show It" ID="button1" onClick='showit()'>
+<INPUT TYPE="button" VALUE="New Cards" ID="button2" onClick='newcards()'>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+</FORM>
+</body>
+</html>
