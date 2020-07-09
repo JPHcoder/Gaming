@@ -5,6 +5,8 @@ My first gaming readme.md has links to the games
 
 [High-Low](js/cardgames/highlow.html)
 
+[Double Shutter](js/dicegames/DoubleShutter.html)
+
 [Hangman](js/hangman/playHangman.html)
 
 [guessthenumber](js/guessthenumber/guessIt.html)
