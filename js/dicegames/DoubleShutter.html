@@ -1,0 +1,146 @@
+<html>
+<body>
+
+<h1>Shut the SUPER box</h1>
+
+<button autofocus onclick="setboard(); setFocusRDB();">Set Up Board</button>
+
+<p>When you roll the dice you add up numbers to the get the total and then you flip the numbers down! Can you shut the SUPER box?</p>
+
+<p>Click the button to roll the dice</p>
+
+<button id="rdb" onclick="myFunction()">Roll Dice</button>
+
+<center>
+<table border=1>
+ <tr>
+  <th>Dice One</th>
+  <th>Dice Two</th>
+ </tr>
+ <tr>
+  <td>
+   <center><h1><p id="first"></p></h1></center>
+  </td>
+  <td>
+   <center><h1><p id= "second"></p></h1></center> 
+  </td>
+ </tr>
+</table>
+</center>
+
+<br> <br> <br> <br>
+
+<center>
+<table border=8>
+ <tr>
+  <td width="10%" bgcolor="yellow"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutY9();"><h1><p id="y9"></p></h1></button></center></td>
+  <td width="10%" bgcolor="yellow"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutY8();"><h1><p id="y8"></p></h1></button></center></td>
+  <td width="10%" bgcolor="yellow"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutY7();"><h1><p id="y7"></p></h1></button></center></td>
+  <td width="10%" bgcolor="yellow"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutY6();"><h1><p id="y6"></p></h1></button></center></td>
+  <td width="10%" bgcolor="yellow"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutY5();"><h1><p id="y5"></p></h1></button></center></td>
+  <td width="10%" bgcolor="yellow"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutY4();"><h1><p id="y4"></p></h1></button></center></td>
+  <td width="10%" bgcolor="yellow"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutY3();"><h1><p id="y3"></p></h1></button></center></td>
+  <td width="10%" bgcolor="yellow"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutY2();"><h1><p id="y2"></p></h1></button></center></td>
+  <td width="10%" bgcolor="yellow"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutY1();"><h1><p id="y1"></p></h1></button></center></td>
+ </tr>
+ <tr>
+  <td width="10%" bgcolor="red"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutR1();"><h1><p id="r1"></p></h1></button></center></td>
+  <td width="10%" bgcolor="red"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutR2();"><h1><p id="r2"></p></h1></button></center></td>
+  <td width="10%" bgcolor="red"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutR3();"><h1><p id="r3"></p></h1></button></center></td>
+  <td width="10%" bgcolor="red"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutR4();"><h1><p id="r4"></p></h1></button></center></td>
+  <td width="10%" bgcolor="red"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutR5();"><h1><p id="r5"></p></h1></button></center></td>
+  <td width="10%" bgcolor="red"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutR6();"><h1><p id="r6"></p></h1></button></center></td>
+  <td width="10%" bgcolor="red"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutR7();"><h1><p id="r7"></p></h1></button></center></td>
+  <td width="10%" bgcolor="red"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutR8();"><h1><p id="r8"></p></h1></button></center></td>
+  <td width="10%" bgcolor="red"><center><button onclick="var c=this; c.disabled=true; setFocusRDB(); shutR9();"><h1><p id="r9"></p></h1></button></center></td>
+ </tr>
+</table>
+</center>
+
+<hr>
+<center><a href="./DoubleShutter.html">New Game</a></center>
+<br>
+<center><button onclick="stuck()">I'm Stuck</button></center>
+
+<script>
+function myFunction() {
+  var die1=Math.ceil(Math.random()*6);
+  document.getElementById("first").innerHTML = die1;
+
+  var die2=Math.ceil(Math.random()*6);
+  document.getElementById("second").innerHTML = die2;
+}
+
+function setFocusRDB() {
+  document.getElementById("rdb").focus();
+}
+
+function stuck() {
+  var tiles=0;
+  if (document.getElementById("r1").innerHTML!="X") tiles++;
+  if (document.getElementById("r2").innerHTML!="X") tiles++;   
+  if (document.getElementById("r3").innerHTML!="X") tiles++;   
+  if (document.getElementById("r4").innerHTML!="X") tiles++;   
+  if (document.getElementById("r5").innerHTML!="X") tiles++;   
+  if (document.getElementById("r6").innerHTML!="X") tiles++;   
+  if (document.getElementById("r7").innerHTML!="X") tiles++;   
+  if (document.getElementById("r8").innerHTML!="X") tiles++;   
+  if (document.getElementById("r9").innerHTML!="X") tiles++;   
+  if (document.getElementById("y1").innerHTML!="X") tiles++;   
+  if (document.getElementById("y2").innerHTML!="X") tiles++;   
+  if (document.getElementById("y3").innerHTML!="X") tiles++;   
+  if (document.getElementById("y4").innerHTML!="X") tiles++;   
+  if (document.getElementById("y5").innerHTML!="X") tiles++;   
+  if (document.getElementById("y6").innerHTML!="X") tiles++;   
+  if (document.getElementById("y7").innerHTML!="X") tiles++;   
+  if (document.getElementById("y8").innerHTML!="X") tiles++;   
+  if (document.getElementById("y9").innerHTML!="X") tiles++;   
+   
+  alert("Good Job! You had "+tiles+" left!");
+}
+
+function setboard() {
+  document.getElementById("r1").innerHTML = "1";
+  document.getElementById("r2").innerHTML = "2";
+  document.getElementById("r3").innerHTML = "3";
+  document.getElementById("r4").innerHTML = "4";
+  document.getElementById("r5").innerHTML = "5";
+  document.getElementById("r6").innerHTML = "6";
+  document.getElementById("r7").innerHTML = "7";
+  document.getElementById("r8").innerHTML = "8";
+  document.getElementById("r9").innerHTML = "9";
+  document.getElementById("y1").innerHTML = "1";
+  document.getElementById("y2").innerHTML = "2";
+  document.getElementById("y3").innerHTML = "3";
+  document.getElementById("y4").innerHTML = "4";
+  document.getElementById("y5").innerHTML = "5";
+  document.getElementById("y6").innerHTML = "6";
+  document.getElementById("y7").innerHTML = "7";
+  document.getElementById("y8").innerHTML = "8";
+  document.getElementById("y9").innerHTML = "9";
+}
+
+function shutR1() { document.getElementById("r1").innerHTML = "X"; }
+function shutR2() { document.getElementById("r2").innerHTML = "X"; }
+function shutR3() { document.getElementById("r3").innerHTML = "X"; }
+function shutR4() { document.getElementById("r4").innerHTML = "X"; }
+function shutR5() { document.getElementById("r5").innerHTML = "X"; }
+function shutR6() { document.getElementById("r6").innerHTML = "X"; }
+function shutR7() { document.getElementById("r7").innerHTML = "X"; }
+function shutR8() { document.getElementById("r8").innerHTML = "X"; }
+function shutR9() { document.getElementById("r9").innerHTML = "X"; }
+function shutY9() { document.getElementById("y9").innerHTML = "X"; }
+function shutY8() { document.getElementById("y8").innerHTML = "X"; }
+function shutY7() { document.getElementById("y7").innerHTML = "X"; }
+function shutY6() { document.getElementById("y6").innerHTML = "X"; }
+function shutY5() { document.getElementById("y5").innerHTML = "X"; }
+function shutY4() { document.getElementById("y4").innerHTML = "X"; }
+function shutY3() { document.getElementById("y3").innerHTML = "X"; }
+function shutY2() { document.getElementById("y2").innerHTML = "X"; }
+function shutY1() { document.getElementById("y1").innerHTML = "X"; }
+
+
+</script>
+
+</body>
+</html>
