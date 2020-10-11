@@ -16,3 +16,5 @@ My first gaming readme.md has links to the games
 [Deal or No Deal](js/dealornodeal/deal.html)
 
 [Spanish Flashcards](js/flashcards/spanish1.html)
+
+[WordFinder](js/wordfinder/wordfinder.html)
