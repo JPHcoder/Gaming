@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<center><h1>ProBowl</h1></center>
+<center><button onclick="newGame();">New Game</button></center>
+
+<hr>
+<center><button autofocus onclick="nextPlay();">Next Play</button></center>
+
+<center>
+<table width="90%">
+ <tr>
+  <td width="30%"><center><p id="idafcposs"></p></center></td>
+  <td width="30%"><center><h1><p id="iddistance"></p></h1></center></td>
+  <td width="30%"><center><p id="idnfcposs"></p></center></td>
+ </tr>
+ <tr>
+  <td width="30%"><center><h1><font color="red">AFC</font></h1></center></td>
+  <td width="30%"><center><h1><p id="idquarter"></p></h1></center></td>
+  <td width="30%"><center><h1><font color="blue">NFC</font></h1></center></td>  
+ </tr>
+  <td width="30%"><center><h1><p id="idafcscore"></p></h1></center></td>
+  <td width="30%"><center><h1><p id="idtime"></p></h1></center></td>
+  <td width="30%"><center><h1><p id="idnfcscore"></p></h1></center></td>
+ </tr>
+ </tr>
+  <td width="30%"><center><h1><p id="idleftplay"></p></h1></center></td>
+  <td width="30%"><center><h1><p id="idresult"></p></h1></center></td>
+  <td width="30%"><center><h1><p id="idrightplay"></p></h1></center></td>
+ </tr>
+</table>
+</center>
+<hr>
+<center><button onclick="kickEP();">Kick Extra Point</button>&nbsp;&nbsp;&nbsp;<button onclick="punt();">Punt</button></center>
+<br>
+<center><h1><p id="idkick"></p></h1></center>
+<hr>
+
+<script>
+var afcscore=0;
+var nfcscore=0;
+var wastd=0;
+var afcposs=1;
+var nfcposs=0;
+var optext="Offensive Play Text";
+var dptext="Defensive Play Text";
+var rtext="Play Result Text";
+var quartertext="1Q";
+var playsleft=120;
+var playnum=0;
+var isT=0;
+var timetext="15:00";
+var yardstogo=10;
+var down=1;
+var yardline=20;
+var togodistance=10;
+var distancetext="";
+var opta = [""];
+var opda = [""];
+var dpta = [""];
+var stkda = [""];
+var stpda = [""];
+
+
+function nextPlay() {
+/*
+ if (afcposs == 1) {
+  document.getElementById("idleftplay").innerHTML = optext;
+  document.getElementById("idrightplay").innerHTML = dptext;
+ }
+ document.getElementById("idresult").innerHTML = rtext;
+*/
+ playnum=120-playsleft;
+ getResult();
+ calculateDownAndDistance();
+ playsleft--; 
+ updateTime();
+
+ if (isT == 1) {
+  if (afcposs == 1) {
+   document.getElementById("idrightplay").innerHTML = opda[playnum] + " Yard " + opta[playnum];
+   document.getElementById("idleftplay").innerHTML = dpta[playnum];
+  }
+  else if (nfcposs == 1) {
+   document.getElementById("idleftplay").innerHTML = opda[playnum] + " Yard " + opta[playnum];
+   document.getElementById("idrightplay").innerHTML = dpta[playnum];
+  } 
+ }
+ else if (afcposs == 1) {
+  document.getElementById("idleftplay").innerHTML = opda[playnum] + " Yard " + opta[playnum];
+  document.getElementById("idrightplay").innerHTML = dpta[playnum];
+ }
+ else if (nfcposs == 1) {
+  document.getElementById("idrightplay").innerHTML = opda[playnum] + " Yard " + opta[playnum];
+  document.getElementById("idleftplay").innerHTML = dpta[playnum];
+ }
+ document.getElementById("idkick").innerHTML = "";
+}
+
+function getResult() {
+ var myresult="";
+ var gain=0;
+ var scored=0;
+ isT=0;
+ var isTTD=0;
+ if (opta[playnum] == "Pass") { 
+  if (dpta[playnum] == "Pass Defense") { myresult = "No Gain"; down++; }
+  if (dpta[playnum] == "Run Defense") { myresult = "Full Gain"; down++; gain=opda[playnum]; }
+  if (dpta[playnum] == "Fumble") { myresult = "Double Gain"; down++; gain=2*opda[playnum]; }
+  if (dpta[playnum] == "Interception") { myresult = "Turnover"; isT=1; }
+  if (dpta[playnum] == "All-Out Blitz") { myresult = "Full Gain + 10 Yards"; down++; gain=10+opda[playnum]; }
+  if (dpta[playnum] == "Zone Blitz") { myresult = "Lose 10 Yards"; down++; gain=-10; }
+  if (dpta[playnum] == "Penalty Flag") { myresult = "Lose 10 Yards and Lose Down"; down++; gain=-10; }
+ }
+ if (opta[playnum] == "Play Action") { 
+  if (dpta[playnum] == "Pass Defense") { myresult = "Half Gain"; down++; gain=opda[playnum]/2; }
+  if (dpta[playnum] == "Run Defense") { myresult = "Full Gain"; down++; gain=opda[playnum]; }
+  if (dpta[playnum] == "Fumble") { myresult = "Turnover"; isT=1; }
+  if (dpta[playnum] == "Interception") { myresult = "Turnover"; isT=1; }
+  if (dpta[playnum] == "All-Out Blitz") { myresult = "Lose 10 Yards"; down++; gain=-10; }
+  if (dpta[playnum] == "Zone Blitz") { myresult = "Lose 5 Yards"; down++; gain=-5;}
+  if (dpta[playnum] == "Penalty Flag") { myresult = "Full Gain"; down++; gain=opda[playnum]; }
+ }
+ if (opta[playnum] == "Screen Pass") { 
+  if (dpta[playnum] == "Pass Defense") { myresult = "5 Yard Gain"; down++; gain=5; }
+  if (dpta[playnum] == "Run Defense") { myresult = "10 Yard Gain"; down++; gain=10; }
+  if (dpta[playnum] == "Fumble") { myresult = "10 Yard Gain"; down++; gain=10; }
+  if (dpta[playnum] == "Interception") { myresult = "Turnover, Defense Scores Touchdown"; isTTD=1; }
+  if (dpta[playnum] == "All-Out Blitz") { myresult = "20 Yard Gain"; down++; gain=20; }
+  if (dpta[playnum] == "Zone Blitz") { myresult = "No Gain"; down++; }
+  if (dpta[playnum] == "Penalty Flag") { myresult = "5 Yards and Replay Down"; gain=5; }
+ }
+ if (opta[playnum] == "Run") { 
+  if (dpta[playnum] == "Pass Defense") { myresult = "Full Gain"; down++; gain=opda[playnum]; }
+  if (dpta[playnum] == "Run Defense") { myresult = "No Gain"; down++; }
+  if (dpta[playnum] == "Fumble") { myresult = "Turnover"; isT=1; }
+  if (dpta[playnum] == "Interception") { myresult = "Double Gain"; down++; gain=2*opda[playnum]; }
+  if (dpta[playnum] == "All-Out Blitz") { myresult = "Lose 10 Yards"; down++; gain=-10; }
+  if (dpta[playnum] == "Zone Blitz") { myresult = "Full Gain + 10 Yards"; down++; gain=10+opda[playnum]; }
+  if (dpta[playnum] == "Penalty Flag") { myresult = "Lose 10 Yards and Replay Down"; gain=-10; }
+ }
+ if (opta[playnum] == "Run Draw") { 
+  if (dpta[playnum] == "Pass Defense") { myresult = "Full Gain"; down++; gain=opda[playnum]; }
+  if (dpta[playnum] == "Run Defense") { myresult = "No Gain"; down++; }
+  if (dpta[playnum] == "Fumble") { myresult = "Turnover, Defense Scores Touchdown"; isTTD=1; }
+  if (dpta[playnum] == "Interception") { myresult = "Full Gain"; down++; gain=opda[playnum]; }
+  if (dpta[playnum] == "All-Out Blitz") { myresult = "No Gain"; down++; }
+  if (dpta[playnum] == "Zone Blitz") { myresult = "Full Gain + 10 Yards"; down++; gain=10+opda[playnum]; }
+  if (dpta[playnum] == "Penalty Flag") { myresult = "Lose 5 Yards and Replay Down"; gain=-5; }
+ }
+
+ if (isTTD == 1) {
+  if (afcposs == 1) {
+   alert("Turnover, Defense (NFC) Scores Touchdown and extra point was good!");
+   nfcscore=nfcscore+7;
+   document.getElementById("idnfcscore").innerHTML = nfcscore;
+   down=1;
+   togodistance=10;
+   yardline=20;
+  }
+  else if (nfcposs == 1) {
+   alert("Turnover, Defense (AFC) Scores Touchdown and extra point was good!");
+   afcscore=afcscore+7;
+   document.getElementById("idafcscore").innerHTML = afcscore;
+   down=1;
+   togodistance=10;
+   yardline=80;
+  }
+  document.getElementById("idresult").innerHTML = myresult;
+ }
+ else if (isT == 1) {
+  if (afcposs == 1) { 
+   afcposs = 0; 
+   nfcposs = 1; 
+   down=1;
+   togodistance=10;
+   document.getElementById("idafcposs").innerHTML = "";
+   document.getElementById("idnfcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+   document.getElementById("idleftplay").innerHTML = "XXX";
+   document.getElementById("idrightplay").innerHTML = "XXX";
+  }
+  else if (nfcposs == 1) { 
+   nfcposs = 0; 
+   afcposs = 1; 
+   down=1;
+   togodistance=10;
+   document.getElementById("idafcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+   document.getElementById("idnfcposs").innerHTML = "";
+   document.getElementById("idleftplay").innerHTML = "YYY";
+   document.getElementById("idrightplay").innerHTML = "YYY";
+  }
+  document.getElementById("idresult").innerHTML = myresult;
+ }
+ else {
+  if (gain>0) { myresult = myresult + " <font color=\"#39FF14\">+" + gain + "</font>"; }
+  else if (gain<0) { myresult = myresult + " <font color=\"red\">" + gain + "</font>"; }
+
+  if (afcposs == 1 ) { yardline=yardline+gain; }
+  else if (nfcposs == 1 ) { yardline=yardline-gain; }
+
+  if (afcposs == 1 && yardline<100) { 
+   togodistance=togodistance-gain;
+   if (togodistance <= 0 ) { down=1; togodistance=10; } 
+  }
+  else if (afcposs == 1 && yardline>=100) {
+   scored=1;
+   myresult = myresult + " - TOUCHDOWN";
+   wastd=1;
+   alert("AFC Touchdown!  Time to kick extra point.");
+   afcscore=afcscore+6;
+   document.getElementById("idafcscore").innerHTML = afcscore;
+  }
+  else if (nfcposs == 1 && yardline>0) { 
+   togodistance=togodistance-gain;
+   if (togodistance <= 0 ) { down=1; togodistance=10; } 
+  }
+  else if (nfcposs == 1 && yardline<=0) { 
+   scored=1;
+   myresult = myresult + " - TOUCHDOWN";
+   wastd=1;
+   alert("NFC Touchdown!  Time to kick extra point.");
+   nfcscore=nfcscore+6;
+   document.getElementById("idnfcscore").innerHTML = nfcscore;
+  }
+
+  if (scored == 1 && down == 5) { down--; }
+
+  if (down == 5) {
+   myresult = myresult + " - Turnover On Downs";
+   if (afcposs == 1) {
+    afcposs=0;
+    document.getElementById("idafcposs").innerHTML = "";
+    nfcposs=1;
+    document.getElementById("idnfcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+    down=1;
+    togodistance=10;
+    calculateDownAndDistance();
+   }
+   else if (nfcposs == 1) {
+    nfcposs=0;
+    document.getElementById("idnfcposs").innerHTML = "";
+    afcposs=1;
+    document.getElementById("idafcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+    down=1;
+    togodistance=10;
+    calculateDownAndDistance();
+   }
+  }
+
+  document.getElementById("idresult").innerHTML = myresult;
+ } // end of else statement
+}
+
+function calculateDownAndDistance() {
+ distancetext="";
+ var toez=100-yardline;
+
+ if (down == 1) { distancetext = distancetext + "1st "; }
+ else if (down == 2) { distancetext = distancetext + "2nd "; }
+ else if (down == 3) { distancetext = distancetext + "3rd "; }
+ else if (down == 4) { distancetext = distancetext + "4th "; }
+  
+ distancetext = distancetext + "and " + togodistance + " from ";
+
+ if (yardline < 50) { distancetext = distancetext + "AFC " + yardline; }
+ else if (yardline > 50) { distancetext = distancetext + "NFC " + toez; }
+ else if (yardline == 50) { distancetext = distancetext + "midfield"; }
+
+ document.getElementById("iddistance").innerHTML = distancetext;
+ if (wastd == 1) { document.getElementById("iddistance").innerHTML = "TOUCHDOWN"; wastd=0; }
+}
+
+function updateTime() {
+ var mytime=playsleft%30;
+ if (playsleft==120) document.getElementById("idquarter").innerHTML = "1Q";
+ else if (playsleft==90) document.getElementById("idquarter").innerHTML = "2Q";
+ else if (playsleft==60) document.getElementById("idquarter").innerHTML = "3Q";
+ else if (playsleft==30) document.getElementById("idquarter").innerHTML = "4Q";
+
+ if (mytime == 0) document.getElementById("idtime").innerHTML = "15:00";
+ else if (mytime == 29) document.getElementById("idtime").innerHTML = "14:30";
+ else if (mytime == 28) document.getElementById("idtime").innerHTML = "14:00";
+ else if (mytime == 27) document.getElementById("idtime").innerHTML = "13:30";
+ else if (mytime == 26) document.getElementById("idtime").innerHTML = "13:00";
+ else if (mytime == 25) document.getElementById("idtime").innerHTML = "12:30";
+ else if (mytime == 24) document.getElementById("idtime").innerHTML = "12:00";
+ else if (mytime == 23) document.getElementById("idtime").innerHTML = "11:30";
+ else if (mytime == 22) document.getElementById("idtime").innerHTML = "11:00";
+ else if (mytime == 21) document.getElementById("idtime").innerHTML = "10:30";
+ else if (mytime == 20) document.getElementById("idtime").innerHTML = "10:00";
+ else if (mytime == 19) document.getElementById("idtime").innerHTML = "9:30";
+ else if (mytime == 18) document.getElementById("idtime").innerHTML = "9:00";
+ else if (mytime == 17) document.getElementById("idtime").innerHTML = "8:30";
+ else if (mytime == 16) document.getElementById("idtime").innerHTML = "8:00";
+ else if (mytime == 15) document.getElementById("idtime").innerHTML = "7:30";
+ else if (mytime == 14) document.getElementById("idtime").innerHTML = "7:00";
+ else if (mytime == 13) document.getElementById("idtime").innerHTML = "6:30";
+ else if (mytime == 12) document.getElementById("idtime").innerHTML = "6:00";
+ else if (mytime == 11) document.getElementById("idtime").innerHTML = "5:30";
+ else if (mytime == 10) document.getElementById("idtime").innerHTML = "5:00";
+ else if (mytime == 9) document.getElementById("idtime").innerHTML = "4:30";
+ else if (mytime == 8) document.getElementById("idtime").innerHTML = "4:00";
+ else if (mytime == 7) document.getElementById("idtime").innerHTML = "3:30";
+ else if (mytime == 6) document.getElementById("idtime").innerHTML = "3:00";
+ else if (mytime == 5) document.getElementById("idtime").innerHTML = "2:30";
+ else if (mytime == 4) document.getElementById("idtime").innerHTML = "2:00";
+ else if (mytime == 3) document.getElementById("idtime").innerHTML = "1:30";
+ else if (mytime == 2) document.getElementById("idtime").innerHTML = "1:00";
+ else if (mytime == 1) document.getElementById("idtime").innerHTML = "0:30";
+
+ if (playsleft == 60) {
+  down=1;
+  togodistance=10;
+  yardline=80;
+  afcposs=0;
+  nfcposs=1;
+  document.getElementById("iddistance").innerHTML = "Halftime";
+  document.getElementById("idafcposs").innerHTML = "";
+  document.getElementById("idnfcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+ } 
+
+ if (playsleft==0) {
+  alert("Game Over !");
+  document.getElementById("idquarter").innerHTML = "Game Over";
+  document.getElementById("idtime").innerHTML = "0:00";
+ }
+
+}
+
+function kickFG() {
+}
+
+function punt() {
+ var pd = Math.floor((Math.random() * (6))+1)*10;
+ if (afcposs == 1) {
+    afcposs=0;
+    document.getElementById("idafcposs").innerHTML = "";
+    nfcposs=1;
+    document.getElementById("idnfcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+    down=1;
+    togodistance=10;
+    yardline=yardline+pd;
+    if (yardline >= 100) { yardline=80; }    
+    calculateDownAndDistance();
+    myresult="AFC punted "+pd+" yards";
+    document.getElementById("idresult").innerHTML = myresult;
+ }
+ else if (nfcposs == 1) {
+    nfcposs=0;
+    document.getElementById("idnfcposs").innerHTML = "";
+    afcposs=1;
+    document.getElementById("idafcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+    down=1;
+    togodistance=10;
+    yardline=yardline-pd;
+    if (yardline <= 0) { yardline=20; }    
+    calculateDownAndDistance();
+    myresult="NFC punted "+pd+" yards";
+    document.getElementById("idresult").innerHTML = myresult;
+ }
+
+}
+
+
+function kickEP() {
+ var roll = Math.floor(Math.random() * (6));
+ if (afcposs == 1) {
+  if (roll == 5) {
+   afcscore=afcscore+2;
+   document.getElementById("idkick").innerHTML = "Fake, 2 point conversion was good";
+  }
+  else if (roll == 0) {
+   document.getElementById("idkick").innerHTML = "Extra point was NO good";
+  }
+  else {
+   afcscore=afcscore+1;
+   document.getElementById("idkick").innerHTML = "Extra point was good";
+  }
+  
+  document.getElementById("idafcscore").innerHTML = afcscore;
+  afcposs=0;
+  document.getElementById("idafcposs").innerHTML = "";
+  nfcposs=1;
+  document.getElementById("idnfcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+  down=1;
+  togodistance=10;
+  yardline=80;
+  distancetext="1st and 10 from NFC 20";
+  document.getElementById("iddistance").innerHTML = distancetext;
+ }
+ else if (nfcposs == 1) {
+  if (roll == 5) {
+   nfcscore=nfcscore+2;
+   document.getElementById("idkick").innerHTML = "Fake, 2 point conversion was good";
+  }
+  else if (roll == 0) {
+   document.getElementById("idkick").innerHTML = "Extra point was NO good";
+  }
+  else {
+   nfcscore=nfcscore+1;
+   document.getElementById("idkick").innerHTML = "Extra point was good";
+  }
+
+  document.getElementById("idnfcscore").innerHTML = nfcscore;
+  nfcposs=0;
+  document.getElementById("idnfcposs").innerHTML = "";
+  afcposs=1;
+  document.getElementById("idafcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+  down=1;
+  togodistance=10;
+  yardline=20;
+  distancetext="1st and 10 from AFC 20";
+  document.getElementById("iddistance").innerHTML = distancetext;
+ }
+
+}
+
+function newGame() {
+ document.getElementById("iddistance").innerHTML = distancetext;
+ document.getElementById("idquarter").innerHTML = quartertext;
+ document.getElementById("idtime").innerHTML = timetext;
+ document.getElementById("idafcscore").innerHTML = afcscore;
+ document.getElementById("idnfcscore").innerHTML = nfcscore;
+ if (afcposs == 1) document.getElementById("idafcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+ if (nfcposs == 1) document.getElementById("idnfcposs").innerHTML = "<img src=\"football.jpg\" width=\"55\" height=\"38\">";
+
+ var i;
+ for (i=0; i<14; i++) { opta[i]="Pass"; opda[i]=10; }
+ for (i=14; i<22; i++) { opta[i]="Pass"; opda[i]=20; }
+ for (i=22; i<30; i++) { opta[i]="Pass"; opda[i]=30; }
+ for (i=30; i<38; i++) { opta[i]="Pass"; opda[i]=40; }
+ for (i=38; i<46; i++) { opta[i]="Pass"; opda[i]=50; }
+ for (i=46; i<54; i++) { opta[i]="Play Action"; opda[i]=10; }
+ for (i=54; i<62; i++) { opta[i]="Play Action"; opda[i]=30; }
+ for (i=62; i<70; i++) { opta[i]="Play Action"; opda[i]=50; }
+ for (i=70; i<78; i++) { opta[i]="Screen Pass"; opda[i]=10; }
+ for (i=78; i<88; i++) { opta[i]="Run"; opda[i]=10; }
+ for (i=88; i<96; i++) { opta[i]="Run"; opda[i]=15; }
+ for (i=96; i<104; i++) { opta[i]="Run"; opda[i]=20; }
+ for (i=104; i<111; i++) { opta[i]="Run"; opda[i]=25; }
+ for (i=111; i<116; i++) { opta[i]="Run Draw"; opda[i]=10; }
+ for (i=116; i<121; i++) { opta[i]="Run Draw"; opda[i]=15; }
+
+ for (i=0; i<54; i++) { dpta[i]="Pass Defense"; }
+ for (i=54; i<86; i++) { dpta[i]="Run Defense"; }
+ for (i=86; i<92; i++) { dpta[i]="All-Out Blitz"; }
+ for (i=92; i<98; i++) { dpta[i]="Zone Blitz"; }
+ for (i=98; i<107; i++) { dpta[i]="Fumble"; }
+ for (i=107; i<116; i++) { dpta[i]="Interception"; }
+ for (i=116; i<121; i++) { dpta[i]="Penalty Flag"; }
+
+ for (i=0; i<3; i++) { stkda[i]=10; stpda[i]=35; }
+ for (i=3; i<11; i++) { stkda[i]=20; stpda[i]=40; }
+ for (i=11; i<14; i++) { stkda[i]=30; stpda[i]=45; }
+ for (i=14; i<16; i++) { stkda[i]=40; stpda[i]=50; }
+ for (i=16; i<20; i++) { stkda[i]=50; stpda[i]=20; }
+ 
+ calculateDownAndDistance();
+ shuffleOP();
+ shuffleArray(dpta);
+ shuffleArray(stkda);
+ shuffleArray(stpda);
+
+
+}
+
+/* Randomize array in-place using Durstenfeld shuffle algorithm */
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+function shuffleOP() {
+    for (var i = opta.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tempt = opta[i];
+        var tempd = opda[i];
+        opta[i] = opta[j];
+        opda[i] = opda[j];
+        opta[j] = tempt;
+        opda[j] = tempd;
+    }
+}
+
+ 
+ 
+</script>
+
+</body>
+</html>
