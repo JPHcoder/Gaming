@@ -1,6 +1,12 @@
 # Gaming
 My first gaming readme.md has links to the games
 
+[probowl](js/probowl/probowl.html)
+
+[monopoly](js/monopoly/index.html)
+
+[risk](js/risk/index.html)
+
 [snake](js/snake/index.html)
 
 [High-Low](js/cardgames/highlow.html)
