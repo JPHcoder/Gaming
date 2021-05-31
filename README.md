@@ -1,5 +1,7 @@
 # Gaming
-My first gaming readme.md has links to the games
+Links to the games
+
+[Double Shutter](js/dicegames/DoubleShutter.html)
 
 [probowl](js/probowl/probowl.html)
 
@@ -9,9 +11,11 @@ My first gaming readme.md has links to the games
 
 [snake](js/snake/index.html)
 
-[High-Low](js/cardgames/highlow.html)
+[checkers](js/checkers/index.html)
 
-[Double Shutter](js/dicegames/DoubleShutter.html)
+[chess](js/chess/chess.html)
+
+[breakout](js/breakout/breakout.html)
 
 [Hangman](js/hangman/playHangman.html)
 
@@ -24,3 +28,6 @@ My first gaming readme.md has links to the games
 [Spanish Flashcards](js/flashcards/spanish1.html)
 
 [WordFinder](js/wordfinder/wordfinder.html)
+
+[High-Low](js/cardgames/highlow.html)
+
