@@ -9,6 +9,8 @@ Links to the games
 
 [risk](js/risk/index.html)
 
+[texasholdem](js/texasholdem/index.html)
+
 [snake](js/snake/index.html)
 
 [checkers](js/checkers/index.html)
