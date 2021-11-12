@@ -11,6 +11,12 @@ Links to the games
 
 [texasholdem](js/texasholdem/index.html)
 
+[outrun](js/outrun/index.html)
+
+[tetris](js/tetris/index.html)
+
+[typer](js/typer/typer.html)
+
 [snake](js/snake/index.html)
 
 [checkers](js/checkers/index.html)
