@@ -13,6 +13,8 @@ Links to the games
 
 [outrun](js/outrun/index.html)
 
+[2048](js/2048/index.html)
+
 [tetris](js/tetris/index.html)
 
 [typer](js/typer/typer.html)
